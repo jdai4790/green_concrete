@@ -1,0 +1,65 @@
+Target,Feature,Mean(|SHAP|)
+Cylinder compressive strength (MPa), Cement(kg/m3),7.513812816278327
+Cylinder compressive strength (MPa), Water(kg/m3),6.212719743373531
+Cylinder compressive strength (MPa),SF (kg/m3),3.029925614903139
+Cylinder compressive strength (MPa),GGBFS (kg/m3),2.5526903573100417
+Cylinder compressive strength (MPa),Fine aggregate(kg/m3),1.9428200689763018
+Cylinder compressive strength (MPa),Coarse aggregate(kg/m3),1.8482536542155557
+Cylinder compressive strength (MPa),SP (kg/m3),1.8303301435435344
+Cylinder compressive strength (MPa), FA (kg/m3),0.7044056234454179
+Splitting tensile strength (MPa),Coarse aggregate(kg/m3),0.5458722725673216
+Splitting tensile strength (MPa),Fine aggregate(kg/m3),0.42765316825539673
+Splitting tensile strength (MPa), Water(kg/m3),0.40360826426107477
+Splitting tensile strength (MPa),SP (kg/m3),0.35784932413630727
+Splitting tensile strength (MPa), Cement(kg/m3),0.16804388306123996
+Splitting tensile strength (MPa),SF (kg/m3),0.14151816557695043
+Splitting tensile strength (MPa), FA (kg/m3),0.1053061070792063
+Splitting tensile strength (MPa),GGBFS (kg/m3),0.06484775859040327
+Flexural strength (MPa),Coarse aggregate(kg/m3),0.7716775761709046
+Flexural strength (MPa),Fine aggregate(kg/m3),0.5907231818981046
+Flexural strength (MPa),SP (kg/m3),0.3960940060455817
+Flexural strength (MPa), Water(kg/m3),0.26107694636263373
+Flexural strength (MPa),SF (kg/m3),0.2159595487769769
+Flexural strength (MPa), Cement(kg/m3),0.1386917053269702
+Flexural strength (MPa),GGBFS (kg/m3),0.11981287679544228
+Flexural strength (MPa), FA (kg/m3),0.09035246054913151
+Elastic modulus (GPa),Fine aggregate(kg/m3),2.516637706788557
+Elastic modulus (GPa),Coarse aggregate(kg/m3),2.3499944596571796
+Elastic modulus (GPa), Water(kg/m3),1.7391298015314491
+Elastic modulus (GPa),SP (kg/m3),1.6514216615228794
+Elastic modulus (GPa), Cement(kg/m3),1.1792118420175233
+Elastic modulus (GPa),GGBFS (kg/m3),0.7873195707951519
+Elastic modulus (GPa), FA (kg/m3),0.733884808580253
+Elastic modulus (GPa),SF (kg/m3),0.6385102857373645
+Embodied CO₂ (kg CO₂e/m³), Cement(kg/m3),88.97910796541922
+Embodied CO₂ (kg CO₂e/m³),SP (kg/m3),9.962473609517337
+Embodied CO₂ (kg CO₂e/m³),GGBFS (kg/m3),7.382521556939512
+Embodied CO₂ (kg CO₂e/m³), FA (kg/m3),3.7739025197180487
+Embodied CO₂ (kg CO₂e/m³),Fine aggregate(kg/m3),1.505800541546341
+Embodied CO₂ (kg CO₂e/m³),SF (kg/m3),0.8841053205856154
+Embodied CO₂ (kg CO₂e/m³),Coarse aggregate(kg/m3),0.7989203398402359
+Embodied CO₂ (kg CO₂e/m³), Water(kg/m3),0.6043899987920835
+Cost ($/kg), Cement(kg/m3),13.350314690094699
+Cost ($/kg),SP (kg/m3),12.02050663213443
+Cost ($/kg),SF (kg/m3),7.350045955362315
+Cost ($/kg),Coarse aggregate(kg/m3),2.812132386003454
+Cost ($/kg),GGBFS (kg/m3),1.9882252175314261
+Cost ($/kg), FA (kg/m3),1.290055271897169
+Cost ($/kg),Fine aggregate(kg/m3),1.1110515944148152
+Cost ($/kg), Water(kg/m3),1.0285337155051897
+Drying shrinkage (με) 28d,Coarse aggregate(kg/m3),18.127736167488223
+Drying shrinkage (με) 28d, Water(kg/m3),16.060833341863123
+Drying shrinkage (με) 28d,Fine aggregate(kg/m3),12.957536645685243
+Drying shrinkage (με) 28d,SP (kg/m3),7.866878898660029
+Drying shrinkage (με) 28d,SF (kg/m3),7.68381983235342
+Drying shrinkage (με) 28d, Cement(kg/m3),5.890725500477343
+Drying shrinkage (με) 28d,GGBFS (kg/m3),4.6496267720191815
+Drying shrinkage (με) 28d, FA (kg/m3),3.690524144146558
+Creep (με) 28d,SP (kg/m3),3.7167657410732198
+Creep (με) 28d,GGBFS (kg/m3),3.659355694258876
+Creep (με) 28d, Water(kg/m3),3.009359022166215
+Creep (με) 28d,Coarse aggregate(kg/m3),2.405034316621872
+Creep (με) 28d,Fine aggregate(kg/m3),2.05578897434529
+Creep (με) 28d, Cement(kg/m3),1.8190750644069487
+Creep (με) 28d, FA (kg/m3),0.8770578843082636
+Creep (με) 28d,SF (kg/m3),0.5990050924452294

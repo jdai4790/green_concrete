@@ -1,0 +1,4 @@
+Cylinder compressive strength (MPa): MAE=8.242, RMSE=10.539, R2=0.646, Model=linear_cylinder_compressive_strength_mpa_model.pkl
+Splitting tensile strength (MPa): MAE=1.699, RMSE=2.101, R2=0.124, Model=linear_splitting_tensile_strength_mpa_model.pkl
+Flexural strength (MPa): MAE=1.890, RMSE=2.574, R2=0.143, Model=linear_flexural_strength_mpa_model.pkl
+Elastic modulus (GPa): MAE=7.587, RMSE=11.585, R2=0.094, Model=linear_elastic_modulus_gpa_model.pkl

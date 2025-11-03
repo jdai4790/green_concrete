@@ -1,0 +1,6 @@
+Cylinder compressive strength (MPa): MAE=4.812, RMSE=7.457, R2=0.823
+Splitting tensile strength (MPa): MAE=0.591, RMSE=1.038, R2=0.786
+Flexural strength (MPa): MAE=0.474, RMSE=1.216, R2=0.809
+Elastic modulus (GPa): MAE=2.856, RMSE=5.632, R2=0.786
+Drying shrinkage (με) 28d: MAE=29.801, RMSE=74.778, R2=0.609 | limited domain data
+Creep (με) 28d: MAE=6.372, RMSE=32.522, R2=0.394 | limited domain data
