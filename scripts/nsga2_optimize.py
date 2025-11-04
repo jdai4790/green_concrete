@@ -9,6 +9,12 @@ Objectives:
     2. Minimise cost ($/kg)
 Constraint:
     |predicted_strength - target_strength| ≤ tolerance
+
+Inputs from Streamlit UI:
+    - models: dict of preloaded XGB models
+    - user_constraints: { "strength_target": float, "strength_tolerance": float }
+    - user_bounds: dict of min/max tuples for each constituent
+    - pop_size, n_gen: NSGA-II parameters
 """
 
 import numpy as np
@@ -16,8 +22,6 @@ import pandas as pd
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.optimize import minimize
 from pymoo.core.problem import Problem
-from pathlib import Path
-from xgboost import XGBRegressor
 
 
 # --------------------------------------------------------------
@@ -26,6 +30,24 @@ from xgboost import XGBRegressor
 def run_nsga2(models, user_constraints, user_bounds, pop_size=100, n_gen=60):
     """
     Runs NSGA-II multi-objective optimisation using pre-trained ML models.
+
+    Parameters
+    ----------
+    models : dict
+        Dictionary of pre-trained XGBoost models (keys: 'strength', 'co2', 'cost')
+    user_constraints : dict
+        Contains "strength_target" (float) and "strength_tolerance" (float)
+    user_bounds : dict
+        Variable bounds, e.g. {"cement": (200,350), "water": (140,180), ...}
+    pop_size : int
+        Population size for NSGA-II (default=100)
+    n_gen : int
+        Number of generations for NSGA-II (default=60)
+
+    Returns
+    -------
+    results : pandas.DataFrame
+        Pareto-optimal mix designs and predicted outputs.
     """
 
     # -----------------------------
@@ -38,33 +60,12 @@ def run_nsga2(models, user_constraints, user_bounds, pop_size=100, n_gen=60):
     strength_target = user_constraints["strength_target"]
     tolerance = user_constraints["strength_tolerance"]
 
-    # -----------------------------
-    # Load and normalise feature names
-    # -----------------------------
-    MODELS_DIR = Path(__file__).resolve().parent.parent / "models"
-    FEATURE_FILE = MODELS_DIR / "xgb_features.txt"
-
-    if FEATURE_FILE.exists():
-        with open(FEATURE_FILE, "r") as f:
-            raw_features = [line.strip() for line in f if line.strip()]
-
-        # Map Excel-style headers to variable names used in optimisation
-        rename_map = {
-            "Cement(kg/m3)": "cement",
-            "Water(kg/m3)": "water",
-            "Coarse aggregate(kg/m3)": "coarse_agg",
-            "Fine aggregate(kg/m3)": "fine_agg",
-            "FA (kg/m3)": "FA",
-            "SF (kg/m3)": "SF",
-            "GGBFS (kg/m3)": "GGBFS",
-            "SP (kg/m3)": "SP",
-        }
-
-        # Keep only features relevant to optimisation
-        feature_names = [rename_map.get(f) for f in raw_features if f in rename_map]
-        print(f"✅ Using {len(feature_names)} normalised feature names:", feature_names)
-    else:
-        raise FileNotFoundError(f"Missing feature file: {FEATURE_FILE}")
+    # Explicit feature layout used during model training
+    feature_cols = [
+        "cement", "water", "fine_agg", "coarse_agg",
+        "FA", "SF", "GGBFS", "SP", "binder",
+        "w/b", "SCM_pct", "density"
+    ]
 
     # -----------------------------
     # Define the optimisation problem
@@ -76,13 +77,19 @@ def run_nsga2(models, user_constraints, user_bounds, pop_size=100, n_gen=60):
         def _evaluate(self, X, out, *args, **kwargs):
             df = pd.DataFrame(X, columns=var_names)
 
-            # Filter to match training features
-            df_input = df[feature_names]
+            # --- Derived features (must match training set) ---
+            df["binder"] = df["cement"] + df["FA"] + df["GGBFS"] + df["SF"]
+            df["w/b"] = df["water"] / df["cement"]
+            df["SCM_pct"] = 100 * (df["FA"] + df["GGBFS"] + df["SF"]) / df["binder"]
+            df["SP"] = 0.8
+            df["density"] = 2400
+
+            df = df[feature_cols]
 
             # --- Predictions ---
-            strength = models["strength"].predict(df_input)
-            co2 = models["co2"].predict(df_input)
-            cost = models["cost"].predict(df_input)
+            strength = models["strength"].predict(df)
+            co2 = models["co2"].predict(df)
+            cost = models["cost"].predict(df)
 
             # --- Objectives and constraint ---
             out["F"] = np.column_stack([co2, cost])  # minimise both
@@ -103,13 +110,39 @@ def run_nsga2(models, user_constraints, user_bounds, pop_size=100, n_gen=60):
     # Collect results
     # -----------------------------
     pareto_df = pd.DataFrame(res.X, columns=var_names)
-    pareto_inputs = pareto_df[feature_names].copy()
-    pareto_inputs = pareto_inputs.apply(pd.to_numeric, errors='coerce').fillna(0.0).astype(np.float32)
 
+    # Derived features for output display
+    pareto_df["binder"] = pareto_df["cement"] + pareto_df["FA"] + pareto_df["GGBFS"] + pareto_df["SF"]
+    pareto_df["w/b"] = pareto_df["water"] / pareto_df["cement"]
+    pareto_df["SCM_pct"] = 100 * (pareto_df["FA"] + pareto_df["GGBFS"] + pareto_df["SF"]) / pareto_df["binder"]
+    pareto_df["SP"] = 0.8
+    pareto_df["density"] = 2400
+
+    pareto_inputs = pareto_df[feature_cols].copy()
+
+    # Debug check (useful if something still mismatches)
+    print("Columns used for model prediction:", pareto_inputs.columns.tolist())
+    print("Shape going into model:", pareto_inputs.shape)
+
+    # --- Ensure all numeric columns are float ---
+    pareto_inputs = pd.DataFrame(pareto_inputs)
+
+    # Replace any non-numeric types with numeric, coercing strings/objects to floats
+    pareto_inputs = pareto_inputs.apply(pd.to_numeric, errors='coerce')
+
+    # Replace NaN and inf values (can appear when a range is 0–0)
+    pareto_inputs = pareto_inputs.replace([np.inf, -np.inf], np.nan).fillna(0.0)
+
+    # Cast everything to float32 for XGBoost safety
+    pareto_inputs = pareto_inputs.astype(np.float32)
+
+
+    # --- Predictions ---
     pareto_df["pred_strength_MPa"] = models["strength"].predict(pareto_inputs)
     pareto_df["pred_co2_kg_per_m3"] = models["co2"].predict(pareto_inputs)
     pareto_df["pred_cost_per_kg"] = models["cost"].predict(pareto_inputs)
 
+    # Sort by CO₂ ascending for readability
     pareto_df = pareto_df.sort_values(by="pred_co2_kg_per_m3", ascending=True).reset_index(drop=True)
     return pareto_df
 
@@ -118,6 +151,9 @@ def run_nsga2(models, user_constraints, user_bounds, pop_size=100, n_gen=60):
 # OPTIONAL: Standalone run for testing
 # --------------------------------------------------------------
 if __name__ == "__main__":
+    from xgboost import XGBRegressor
+    from pathlib import Path
+
     MODELS_DIR = Path("./models")
 
     # --- Load JSON XGBoost models ---
@@ -137,17 +173,6 @@ if __name__ == "__main__":
 
     print("✅ All models loaded successfully!\n")
 
-    for name, model in models.items():
-        try:
-            booster = model.get_booster()
-            if booster is not None:
-                print(f"{name} expects {len(booster.feature_names)} features:")
-                print(booster.feature_names)
-            else:
-                print(f"{name} has no booster feature names.")
-        except Exception as e:
-            print(f"{name} feature name check failed: {e}")
-
     # --- User input examples ---
     user_bounds = {
         "cement": (200, 350),
@@ -157,7 +182,6 @@ if __name__ == "__main__":
         "FA": (0, 150),
         "SF": (0, 30),
         "GGBFS": (0, 200),
-        "SP": (0.6, 1.0),
     }
 
     user_constraints = {"strength_target": 45, "strength_tolerance": 3}

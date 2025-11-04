@@ -1,8 +1,6 @@
-Cylinder compressive strength (MPa): MAE=8.106, RMSE=11.531, R2=0.513, Samples=1423, Model=xgb_cylinder_compressive_strength_mpa_model.json
-Splitting tensile strength (MPa): MAE=0.000, RMSE=0.000, R2=1.000, Samples=1423, Model=xgb_splitting_tensile_strength_mpa_model.json
-Flexural strength (MPa): MAE=0.000, RMSE=0.000, R2=1.000, Samples=1423, Model=xgb_flexural_strength_mpa_model.json
-Elastic modulus (GPa): MAE=0.000, RMSE=0.000, R2=1.000, Samples=1423, Model=xgb_elastic_modulus_gpa_model.json
-Embodied CO₂ (kg CO₂e/m³): MAE=1.984, RMSE=5.106, R2=0.997, Samples=1423, Model=xgb_embodied_co_kg_co_e_m_model.json
-Cost ($/kg): MAE=0.956, RMSE=2.215, R2=0.991, Samples=1423, Model=xgb_cost_kg_model.json
-Drying shrinkage (με) 28d: MAE=0.000, RMSE=0.000, R2=1.000, Samples=1423, Model=xgb_drying_shrinkage_28d_model.json | limited domain data
-Creep (με) 28d: MAE=0.000, RMSE=0.000, R2=1.000, Samples=1423, Model=xgb_creep_28d_model.json | limited domain data
+Cylinder compressive strength (MPa): MAE=3.438, RMSE=5.356, R2=0.884, Samples=723, Model=xgb_cylinder_compressive_strength_mpa_model.json
+Splitting tensile strength (MPa): MAE=0.171, RMSE=0.564, R2=0.831, Samples=723, Model=xgb_splitting_tensile_strength_mpa_model.json
+Flexural strength (MPa): MAE=0.000, RMSE=0.000, R2=1.000, Samples=723, Model=xgb_flexural_strength_mpa_model.json
+Elastic modulus (GPa): MAE=0.000, RMSE=0.000, R2=1.000, Samples=723, Model=xgb_elastic_modulus_gpa_model.json
+Drying shrinkage (με) 28d: MAE=0.000, RMSE=0.000, R2=1.000, Samples=723, Model=xgb_drying_shrinkage_28d_model.json | limited domain data
+Creep (με) 28d: MAE=0.000, RMSE=0.000, R2=1.000, Samples=723, Model=xgb_creep_28d_model.json | limited domain data

@@ -14,7 +14,7 @@ import numpy as np
 # Setup paths
 # -------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = Path(r"C:\Users\Jeffrey Dai\OneDrive - The University of Sydney (Students)\CIVL4022 Thesis\green_concrete\data")
+DEFAULT_EXCEL = BASE_DIR / "data" / "dataset.xlsx"
 
 SCRIPTS_DIR = BASE_DIR / "scripts"
 if str(SCRIPTS_DIR) not in sys.path:
@@ -92,6 +92,8 @@ user_bounds = {
     "SP": slider_range("Superplasticizer (SP)", 0.0, 2.0, 0.5, 1.5, step=0.05),  # ✅ added SP
 }
 
+print(">>> Bounds keys:", list(user_bounds.keys()))
+
 # -------------------------------------------------------
 # Run Optimisation
 # -------------------------------------------------------
@@ -108,6 +110,14 @@ if st.sidebar.button("🚀 Run Optimisation"):
 
         # ✅ Run optimisation
         results = run_nsga2(models, constraints, user_bounds, pop_size=100, n_gen=60)
+
+        print(">>> Type of results:", type(results))
+        if isinstance(results, pd.DataFrame):
+            print(">>> Results shape:", results.shape)
+            print(">>> Results columns:", list(results.columns))
+            print(">>> First few rows:\n", results.head())
+        else:
+            print(">>> Results preview:", results)
 
     st.success("✅ Optimisation complete!")
 
