@@ -27,7 +27,7 @@ from pymoo.core.problem import Problem
 # --------------------------------------------------------------
 # MAIN FUNCTION
 # --------------------------------------------------------------
-def run_nsga2(models, user_constraints, user_bounds, pop_size=100, n_gen=60):
+def run_nsga2(models, user_constraints, user_bounds, pop_size=500, n_gen=200):
     """
     Runs NSGA-II multi-objective optimisation using pre-trained ML models.
 

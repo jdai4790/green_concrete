@@ -69,7 +69,7 @@ def small_data_note(target: str, n: int) -> str:
         note_parts.append(f"small sample (n={n})")
     return "; ".join(note_parts)
 
-EXCLUDE_PATTERNS = [r"embodied\s*co", r"\bcost\b", r"shrinkage", r"\bcreep\b"]
+EXCLUDE_PATTERNS = [r"shrinkage", r"\bcreep\b"]
 def is_excluded(col: str) -> bool:
     cl = col.lower()
     return any(re.search(pat, cl, flags=re.IGNORECASE) for pat in EXCLUDE_PATTERNS)
