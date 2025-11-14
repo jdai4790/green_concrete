@@ -10,3 +10,4 @@ Chloride permeability (Coulomb) 28d
 Chloride permeability (Coulomb) 90d
 Chloride permeability (Coulomb) 180d
 Abrasion (mm) 28 d
+w/b Ratio

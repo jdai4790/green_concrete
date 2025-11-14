@@ -1,0 +1,8 @@
+Variable,Theoretical Min,Theoretical Max,Observed Min,Observed Max
+w/b,0.35,0.6,0.4201,0.4964
+binder,280.0,480.0,325.746,387.2541
+FA_over_b,0.0,0.4,0.3225,0.3832
+GGBFS_over_b,0.0,0.7,0.0,0.119
+SF_over_b,0.0,0.1,0.0002,0.024
+SCM_total_over_b,0.0,0.5,0.3644,0.4667
+agg_total,1700.0,2000.0,1836.1069,1845.1885
