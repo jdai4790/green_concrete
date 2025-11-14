@@ -82,10 +82,10 @@ def slider_range(label, lo, hi, default_lo, default_hi, step=1.0):
 # Material Sliders
 # -------------------------------------------------------
 user_bounds = {
-    "cement": slider_range("Cement", 100.0, 500.0, 200.0, 350.0),
-    "water": slider_range("Water", 100.0, 250.0, 140.0, 180.0),
-    "fine_agg": slider_range("Fine Aggregate", 700.0, 1000.0, 800.0, 950.0),
-    "coarse_agg": slider_range("Coarse Aggregate", 800.0, 1200.0, 900.0, 1100.0),
+    "cement": slider_range("Cement", 0.0, 500.0, 200.0, 350.0),
+    "water": slider_range("Water", 0.0, 250.0, 140.0, 180.0),
+    "fine_agg": slider_range("Fine Aggregate", 0.0, 1000.0, 800.0, 950.0),
+    "coarse_agg": slider_range("Coarse Aggregate", 0.0, 1200.0, 900.0, 1100.0),
     "FA": slider_range("Fly Ash (FA)", 0.0, 200.0, 0.0, 150.0),
     "SF": slider_range("Silica Fume (SF)", 0.0, 60.0, 0.0, 30.0),
     "GGBFS": slider_range("GGBFS", 0.0, 250.0, 0.0, 200.0),
