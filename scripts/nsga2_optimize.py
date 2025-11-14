@@ -86,7 +86,7 @@ def run_nsga2(models, user_constraints, user_bounds, pop_size=500, n_gen=200):
             df["binder"] = df["cement"] + df["FA"] + df["GGBFS"] + df["SF"]
             df["w/b"] = df["water"] / df["binder"]
             df["SCM_pct"] = (df["FA"] + df["GGBFS"] + df["SF"]) / df["binder"]
-            df["SP"] = 0.8
+            # df["SP"] = 0.8
             df["density"] = 2400
 
             # SCM fractions
@@ -153,7 +153,7 @@ def run_nsga2(models, user_constraints, user_bounds, pop_size=500, n_gen=200):
     pareto_df["binder"] = pareto_df["cement"] + pareto_df["FA"] + pareto_df["GGBFS"] + pareto_df["SF"]
     pareto_df["w/b"] = pareto_df["water"] / pareto_df["binder"]
     pareto_df["SCM_pct"] = (pareto_df["FA"] + pareto_df["GGBFS"] + pareto_df["SF"]) / pareto_df["binder"]
-    pareto_df["SP"] = 0.8
+    # pareto_df["SP"] = 0.8
     pareto_df["density"] = 2400
     pareto_df["agg_total"] = pareto_df["fine_agg"] + pareto_df["coarse_agg"]
 
