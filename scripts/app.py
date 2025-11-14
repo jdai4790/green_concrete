@@ -88,7 +88,7 @@ user_bounds = {
     "coarse_agg": slider_range("Coarse Aggregate", 0.0, 1200.0, 900.0, 1100.0),
     "FA": slider_range("Fly Ash (FA)", 0.0, 200.0, 0.0, 150.0),
     "SF": slider_range("Silica Fume (SF)", 0.0, 60.0, 0.0, 30.0),
-    "GGBFS": slider_range("GGBFS", 0.0, 250.0, 0.0, 200.0),
+    "GGBFS": slider_range("GGBFS", 0.0, 300.0, 0.0, 200.0),
     "SP": slider_range("Superplasticizer (SP)", 0.0, 10.0, 0.5, 1.5, step=0.05),
 }
 
