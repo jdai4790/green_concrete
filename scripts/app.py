@@ -186,7 +186,15 @@ if st.sidebar.button("🚀 Run Optimisation"):
         if "SP" not in user_bounds:
             user_bounds["SP"] = (0.8, 0.8)
 
-        results = run_nsga2(models, constraints, user_bounds, pop_size=100, n_gen=60)
+        raw_results = run_nsga2(models, constraints, user_bounds, pop_size=100, n_gen=60)
+
+        # ---- UNPACK RETURN ----
+        if isinstance(raw_results, tuple):
+            # assume the first element is the dataframe
+            results = raw_results[0]  
+        else:
+            results = raw_results
+
 
     st.success("✅ Optimisation complete!")
 

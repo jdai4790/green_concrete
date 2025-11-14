@@ -1,43 +1,47 @@
 {
-    "population_size": 500,
-    "generations": 200,
+    "population_size": 100,
+    "generations": 60,
     "crossover_probability": 0.9,
     "mutation_probability": 0.14,
     "selection_operator": "tournament",
     "crossover_operator": "simulated binary crossover (SBX, eta=15)",
     "mutation_operator": "polynomial mutation (PM, eta=20)",
     "user_constraints": {
-        "strength_target": 45,
-        "strength_tolerance": 3
+        "strength_target": 45.0,
+        "strength_tolerance": 3.0
     },
     "variable_bounds": {
         "cement": [
-            200,
-            350
+            200.0,
+            350.0
         ],
         "water": [
-            140,
-            180
+            140.0,
+            180.0
         ],
         "fine_agg": [
-            800,
-            950
+            800.0,
+            950.0
         ],
         "coarse_agg": [
-            900,
-            1100
+            900.0,
+            1100.0
         ],
         "FA": [
-            0,
-            150
+            0.0,
+            150.0
         ],
         "SF": [
-            0,
-            30
+            0.0,
+            30.0
         ],
         "GGBFS": [
-            0,
-            200
+            0.0,
+            200.0
+        ],
+        "SP": [
+            0.5,
+            1.5
         ]
     },
     "w/b_constraints": {
